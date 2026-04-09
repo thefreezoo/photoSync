@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="100dp"
+    android:layout_height="100dp">
+
+    <RelativeLayout
+        android:id="@+id/photo_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/holo_green_light"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/photo_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="2dp"
+            android:scaleType="centerCrop"
+            android:background="@android:color/white"
+            android:contentDescription="Photo" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/photo_image_unsynced"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:background="@android:color/white"
+        android:contentDescription="Photo" />
+
+    <ImageView
+        android:id="@+id/synced_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_margin="8dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:src="@android:drawable/ic_menu_save"
+        android:tint="#4CAF50"
+        android:visibility="gone"
+        android:contentDescription="Synced" />
+
+    <ImageView
+        android:id="@+id/selected_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_margin="8dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/ic_check_selected"
+        android:visibility="gone"
+        android:contentDescription="Selected" />
+
+    <!-- Dark overlay for selected photos -->
+    <!-- 50% black overlay -->
+    <View
+        android:id="@+id/selected_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:visibility="gone"
+        android:contentDescription="Selected overlay" />
+
+</RelativeLayout>

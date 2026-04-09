@@ -1,0 +1,320 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:2:1-41:12
+INJECTED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:2:1-41:12
+INJECTED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:2:1-41:12
+INJECTED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:2:1-41:12
+MERGED from [com.google.android.material:material:1.9.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\2992ebd1a31e78f8a0d9986bf6b65bc6\transformed\material-1.9.0\AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\zoo\soft\gradle-7.4\caches\transforms-3\460d238b9d61e64d0f00cc31ddd85908\transformed\constraintlayout-2.1.4\AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\d299317d3abef0337af4f576c6fdbc30\transformed\appcompat-resources-1.6.1\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.appcompat:appcompat:1.6.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\7da1018aef4e77e9ef4a2a3ee7132b33\transformed\appcompat-1.6.1\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager2:viewpager2:1.1.0-beta02] C:\zoo\soft\gradle-7.4\caches\transforms-3\290fd0aa40fcdcd3c5a7d8afd23718b1\transformed\viewpager2-1.1.0-beta02\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.recyclerview:recyclerview:1.3.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\653c61d369b354db7dae1e40c3ca3d42\transformed\recyclerview-1.3.1\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.cardview:cardview:1.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\83fb69cd6437a27d62716b3e2c6c5339\transformed\cardview-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.1.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\d25225470dab610c70a731e2ca4fda6f\transformed\swiperefreshlayout-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\a625ed1fb12ab1eaf721f22ca6aad620\transformed\dynamicanimation-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\f3b5ebaafb0141edea39247d4c42c167\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.1.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\ab3c510d2e31687b655e25e2805835d9\transformed\localbroadcastmanager-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [com.github.bumptech.glide:glide:4.15.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\b4b88363b8ccf79722593e9d649e9e09\transformed\glide-4.15.1\AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.fragment:fragment:1.3.6] C:\zoo\soft\gradle-7.4\caches\transforms-3\eb04c3bbb9918b1c16b05e881389d694\transformed\fragment-1.3.6\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.activity:activity:1.6.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\c8e871297909454ce48dd091ea504736\transformed\activity-1.6.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.5.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\4b2de8ff5eb0d231bff3190cbf60bcee\transformed\lifecycle-viewmodel-savedstate-2.5.1\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.loader:loader:1.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\1ec2d16df117cd8b08028c155755c4f7\transformed\loader-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.5.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\9b50c673e0f3f6af559cda9c526acdbf\transformed\lifecycle-viewmodel-2.5.1\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.savedstate:savedstate:1.2.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\93071e0049c2fb38e691d748472f4b43\transformed\savedstate-1.2.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\6e37fc14383cbcd692aaef7be13887d8\transformed\customview-poolingcontainer-1.0.0\AndroidManifest.xml:17:1-23:12
+MERGED from [androidx.emoji2:emoji2-views-helper:1.2.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\981283c61b00de56c6850b68b7fda6ab\transformed\emoji2-views-helper-1.2.0\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.emoji2:emoji2:1.2.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\b2f0f25a3c1dd067108f4347e4350351\transformed\emoji2-1.2.0\AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\13dcf06fecdb33ec1b4a3bfe4fd558a8\transformed\drawerlayout-1.1.1\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\5aa840e66d972c380815239459ad5a71\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.transition:transition:1.2.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\033fd5d8248e284424f13ee8c705b963\transformed\transition-1.2.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\0977b684b9db525f889426d027be521d\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\da22aa5b5c212e2d31f14c92d8c0a072\transformed\vectordrawable-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.core:core-ktx:1.9.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\054161ea019ddd09fcd17ccd9c00e376\transformed\core-ktx-1.9.0\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\51a56f6f4a48d1d6eb53cb025046a815\transformed\viewpager-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.1.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\7ba4a7281b8af0122616c7a36b02bbbd\transformed\customview-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.core:core:1.9.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\112b22e3c42df748c54747a76c8f7436\transformed\core-1.9.0\AndroidManifest.xml:17:1-30:12
+MERGED from [androidx.annotation:annotation-experimental:1.3.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\713c27fa7fa5d101bb69df5967691210\transformed\annotation-experimental-1.3.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\33e5556dd8535b28edf5650c5e8812de\transformed\cursoradapter-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-process:2.4.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\38cbec902e007fbf50c1cada98ff556e\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:17:1-37:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.5.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\5ae5b8cf712715e576e886bf52792336\transformed\lifecycle-runtime-2.5.1\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\958e3700afafc778e171e31ccd1488fe\transformed\interpolator-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [com.github.bumptech.glide:gifdecoder:4.15.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\463e85e2bc53f5ddc6e178bf8e2af19a\transformed\gifdecoder-4.15.1\AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.exifinterface:exifinterface:1.3.3] C:\zoo\soft\gradle-7.4\caches\transforms-3\ed86d0e35715f2ab4a7a4487bd853bcc\transformed\exifinterface-1.3.3\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.startup:startup-runtime:1.1.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\8852f0037f632b0d222b1b1cdbe1df17\transformed\startup-runtime-1.1.1\AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.tracing:tracing:1.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\adb47faba38b06b86f4f0640110057e9\transformed\tracing-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\f4494948c462e26ca4d899f964316558\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\39469ed9046dd923a26e341ee5b5f935\transformed\lifecycle-livedata-2.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.5.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\cbf88d7d842bf80930f09cad95e7c968\transformed\lifecycle-livedata-core-2.5.1\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.arch.core:core-runtime:2.1.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\ab3c30db4c003e43a40a3aa04c49f677\transformed\core-runtime-2.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\b098e4ef393c4d531f701ecc35b6ea3c\transformed\documentfile-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\a043b3a74b89a35c00481a76d9343e9f\transformed\print-1.0.0\AndroidManifest.xml:17:1-22:12
+INJECTED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:2:1-41:12
+INJECTED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:2:1-41:12
+INJECTED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:2:1-41:12
+	package
+		INJECTED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml
+		ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:2:1-41:12
+		INJECTED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml
+		ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:2:1-41:12
+		INJECTED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml
+	xmlns:tools
+		ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:3:5-51
+	android:versionCode
+		INJECTED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml
+		ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:2:1-41:12
+		INJECTED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:2:11-69
+uses-permission#android.permission.INTERNET
+ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:5:5-67
+	android:name
+		ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:5:22-64
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:6:5-79
+	android:name
+		ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:6:22-76
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:7:5-107
+	android:maxSdkVersion
+		ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:7:78-104
+	android:name
+		ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:7:22-77
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:8:5-108
+	android:maxSdkVersion
+		ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:8:79-105
+	android:name
+		ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:8:22-78
+uses-permission#android.permission.READ_MEDIA_IMAGES
+ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:9:5-76
+	android:name
+		ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:9:22-73
+uses-permission#android.permission.MANAGE_EXTERNAL_STORAGE
+ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:10:5-111
+	tools:ignore
+		ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:10:80-108
+	android:name
+		ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:10:22-79
+application
+ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:12:5-39:19
+MERGED from [com.google.android.material:material:1.9.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\2992ebd1a31e78f8a0d9986bf6b65bc6\transformed\material-1.9.0\AndroidManifest.xml:24:5-20
+MERGED from [com.google.android.material:material:1.9.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\2992ebd1a31e78f8a0d9986bf6b65bc6\transformed\material-1.9.0\AndroidManifest.xml:24:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\zoo\soft\gradle-7.4\caches\transforms-3\460d238b9d61e64d0f00cc31ddd85908\transformed\constraintlayout-2.1.4\AndroidManifest.xml:9:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\zoo\soft\gradle-7.4\caches\transforms-3\460d238b9d61e64d0f00cc31ddd85908\transformed\constraintlayout-2.1.4\AndroidManifest.xml:9:5-20
+MERGED from [com.github.bumptech.glide:glide:4.15.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\b4b88363b8ccf79722593e9d649e9e09\transformed\glide-4.15.1\AndroidManifest.xml:9:5-20
+MERGED from [com.github.bumptech.glide:glide:4.15.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\b4b88363b8ccf79722593e9d649e9e09\transformed\glide-4.15.1\AndroidManifest.xml:9:5-20
+MERGED from [androidx.emoji2:emoji2:1.2.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\b2f0f25a3c1dd067108f4347e4350351\transformed\emoji2-1.2.0\AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.emoji2:emoji2:1.2.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\b2f0f25a3c1dd067108f4347e4350351\transformed\emoji2-1.2.0\AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.core:core:1.9.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\112b22e3c42df748c54747a76c8f7436\transformed\core-1.9.0\AndroidManifest.xml:28:5-89
+MERGED from [androidx.core:core:1.9.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\112b22e3c42df748c54747a76c8f7436\transformed\core-1.9.0\AndroidManifest.xml:28:5-89
+MERGED from [androidx.lifecycle:lifecycle-process:2.4.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\38cbec902e007fbf50c1cada98ff556e\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:25:5-35:19
+MERGED from [androidx.lifecycle:lifecycle-process:2.4.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\38cbec902e007fbf50c1cada98ff556e\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:25:5-35:19
+MERGED from [com.github.bumptech.glide:gifdecoder:4.15.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\463e85e2bc53f5ddc6e178bf8e2af19a\transformed\gifdecoder-4.15.1\AndroidManifest.xml:9:5-20
+MERGED from [com.github.bumptech.glide:gifdecoder:4.15.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\463e85e2bc53f5ddc6e178bf8e2af19a\transformed\gifdecoder-4.15.1\AndroidManifest.xml:9:5-20
+MERGED from [androidx.startup:startup-runtime:1.1.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\8852f0037f632b0d222b1b1cdbe1df17\transformed\startup-runtime-1.1.1\AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\8852f0037f632b0d222b1b1cdbe1df17\transformed\startup-runtime-1.1.1\AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\f4494948c462e26ca4d899f964316558\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\f4494948c462e26ca4d899f964316558\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.9.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\112b22e3c42df748c54747a76c8f7436\transformed\core-1.9.0\AndroidManifest.xml:28:18-86
+	android:supportsRtl
+		ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:16:9-35
+	android:label
+		ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:15:9-41
+	android:icon
+		ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:14:9-43
+	android:allowBackup
+		ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:13:9-35
+	android:theme
+		ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:17:9-41
+	android:networkSecurityConfig
+		ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:18:9-69
+activity#com.example.pho.MainActivity
+ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:19:9-29:20
+	android:label
+		ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:22:13-45
+	android:exported
+		ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:21:13-36
+	android:theme
+		ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:23:13-45
+	android:name
+		ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:20:13-41
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:24:13-28:29
+action#android.intent.action.MAIN
+ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:25:17-69
+	android:name
+		ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:25:25-66
+category#android.intent.category.LAUNCHER
+ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:27:17-77
+	android:name
+		ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:27:27-74
+activity#com.example.pho.ImagePreviewActivity
+ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:30:9-33:48
+	android:exported
+		ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:32:13-37
+	android:theme
+		ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:33:13-45
+	android:name
+		ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:31:13-49
+activity#com.example.pho.NewImagePreviewActivity
+ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:34:9-37:48
+	android:exported
+		ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:36:13-37
+	android:theme
+		ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:37:13-45
+	android:name
+		ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml:35:13-52
+uses-sdk
+INJECTED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml
+INJECTED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml
+MERGED from [com.google.android.material:material:1.9.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\2992ebd1a31e78f8a0d9986bf6b65bc6\transformed\material-1.9.0\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.material:material:1.9.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\2992ebd1a31e78f8a0d9986bf6b65bc6\transformed\material-1.9.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\zoo\soft\gradle-7.4\caches\transforms-3\460d238b9d61e64d0f00cc31ddd85908\transformed\constraintlayout-2.1.4\AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\zoo\soft\gradle-7.4\caches\transforms-3\460d238b9d61e64d0f00cc31ddd85908\transformed\constraintlayout-2.1.4\AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\d299317d3abef0337af4f576c6fdbc30\transformed\appcompat-resources-1.6.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\d299317d3abef0337af4f576c6fdbc30\transformed\appcompat-resources-1.6.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat:1.6.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\7da1018aef4e77e9ef4a2a3ee7132b33\transformed\appcompat-1.6.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat:1.6.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\7da1018aef4e77e9ef4a2a3ee7132b33\transformed\appcompat-1.6.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager2:viewpager2:1.1.0-beta02] C:\zoo\soft\gradle-7.4\caches\transforms-3\290fd0aa40fcdcd3c5a7d8afd23718b1\transformed\viewpager2-1.1.0-beta02\AndroidManifest.xml:5:5-44
+MERGED from [androidx.viewpager2:viewpager2:1.1.0-beta02] C:\zoo\soft\gradle-7.4\caches\transforms-3\290fd0aa40fcdcd3c5a7d8afd23718b1\transformed\viewpager2-1.1.0-beta02\AndroidManifest.xml:5:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.3.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\653c61d369b354db7dae1e40c3ca3d42\transformed\recyclerview-1.3.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.3.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\653c61d369b354db7dae1e40c3ca3d42\transformed\recyclerview-1.3.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\83fb69cd6437a27d62716b3e2c6c5339\transformed\cardview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\83fb69cd6437a27d62716b3e2c6c5339\transformed\cardview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.1.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\d25225470dab610c70a731e2ca4fda6f\transformed\swiperefreshlayout-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.1.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\d25225470dab610c70a731e2ca4fda6f\transformed\swiperefreshlayout-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\a625ed1fb12ab1eaf721f22ca6aad620\transformed\dynamicanimation-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\a625ed1fb12ab1eaf721f22ca6aad620\transformed\dynamicanimation-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\f3b5ebaafb0141edea39247d4c42c167\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\f3b5ebaafb0141edea39247d4c42c167\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.1.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\ab3c510d2e31687b655e25e2805835d9\transformed\localbroadcastmanager-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.1.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\ab3c510d2e31687b655e25e2805835d9\transformed\localbroadcastmanager-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [com.github.bumptech.glide:glide:4.15.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\b4b88363b8ccf79722593e9d649e9e09\transformed\glide-4.15.1\AndroidManifest.xml:5:5-7:41
+MERGED from [com.github.bumptech.glide:glide:4.15.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\b4b88363b8ccf79722593e9d649e9e09\transformed\glide-4.15.1\AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.fragment:fragment:1.3.6] C:\zoo\soft\gradle-7.4\caches\transforms-3\eb04c3bbb9918b1c16b05e881389d694\transformed\fragment-1.3.6\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.3.6] C:\zoo\soft\gradle-7.4\caches\transforms-3\eb04c3bbb9918b1c16b05e881389d694\transformed\fragment-1.3.6\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.6.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\c8e871297909454ce48dd091ea504736\transformed\activity-1.6.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.6.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\c8e871297909454ce48dd091ea504736\transformed\activity-1.6.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.5.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\4b2de8ff5eb0d231bff3190cbf60bcee\transformed\lifecycle-viewmodel-savedstate-2.5.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.5.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\4b2de8ff5eb0d231bff3190cbf60bcee\transformed\lifecycle-viewmodel-savedstate-2.5.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.loader:loader:1.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\1ec2d16df117cd8b08028c155755c4f7\transformed\loader-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\1ec2d16df117cd8b08028c155755c4f7\transformed\loader-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.5.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\9b50c673e0f3f6af559cda9c526acdbf\transformed\lifecycle-viewmodel-2.5.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.5.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\9b50c673e0f3f6af559cda9c526acdbf\transformed\lifecycle-viewmodel-2.5.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.2.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\93071e0049c2fb38e691d748472f4b43\transformed\savedstate-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.2.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\93071e0049c2fb38e691d748472f4b43\transformed\savedstate-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\6e37fc14383cbcd692aaef7be13887d8\transformed\customview-poolingcontainer-1.0.0\AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\6e37fc14383cbcd692aaef7be13887d8\transformed\customview-poolingcontainer-1.0.0\AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.emoji2:emoji2-views-helper:1.2.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\981283c61b00de56c6850b68b7fda6ab\transformed\emoji2-views-helper-1.2.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2-views-helper:1.2.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\981283c61b00de56c6850b68b7fda6ab\transformed\emoji2-views-helper-1.2.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2:1.2.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\b2f0f25a3c1dd067108f4347e4350351\transformed\emoji2-1.2.0\AndroidManifest.xml:21:5-44
+MERGED from [androidx.emoji2:emoji2:1.2.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\b2f0f25a3c1dd067108f4347e4350351\transformed\emoji2-1.2.0\AndroidManifest.xml:21:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\13dcf06fecdb33ec1b4a3bfe4fd558a8\transformed\drawerlayout-1.1.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\13dcf06fecdb33ec1b4a3bfe4fd558a8\transformed\drawerlayout-1.1.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\5aa840e66d972c380815239459ad5a71\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\5aa840e66d972c380815239459ad5a71\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.2.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\033fd5d8248e284424f13ee8c705b963\transformed\transition-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.2.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\033fd5d8248e284424f13ee8c705b963\transformed\transition-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\0977b684b9db525f889426d027be521d\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\0977b684b9db525f889426d027be521d\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\da22aa5b5c212e2d31f14c92d8c0a072\transformed\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\da22aa5b5c212e2d31f14c92d8c0a072\transformed\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core-ktx:1.9.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\054161ea019ddd09fcd17ccd9c00e376\transformed\core-ktx-1.9.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-ktx:1.9.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\054161ea019ddd09fcd17ccd9c00e376\transformed\core-ktx-1.9.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\51a56f6f4a48d1d6eb53cb025046a815\transformed\viewpager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\51a56f6f4a48d1d6eb53cb025046a815\transformed\viewpager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.1.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\7ba4a7281b8af0122616c7a36b02bbbd\transformed\customview-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.1.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\7ba4a7281b8af0122616c7a36b02bbbd\transformed\customview-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.9.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\112b22e3c42df748c54747a76c8f7436\transformed\core-1.9.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.9.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\112b22e3c42df748c54747a76c8f7436\transformed\core-1.9.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.3.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\713c27fa7fa5d101bb69df5967691210\transformed\annotation-experimental-1.3.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.3.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\713c27fa7fa5d101bb69df5967691210\transformed\annotation-experimental-1.3.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\33e5556dd8535b28edf5650c5e8812de\transformed\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\33e5556dd8535b28edf5650c5e8812de\transformed\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.4.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\38cbec902e007fbf50c1cada98ff556e\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.lifecycle:lifecycle-process:2.4.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\38cbec902e007fbf50c1cada98ff556e\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.5.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\5ae5b8cf712715e576e886bf52792336\transformed\lifecycle-runtime-2.5.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.5.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\5ae5b8cf712715e576e886bf52792336\transformed\lifecycle-runtime-2.5.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\958e3700afafc778e171e31ccd1488fe\transformed\interpolator-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\958e3700afafc778e171e31ccd1488fe\transformed\interpolator-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.github.bumptech.glide:gifdecoder:4.15.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\463e85e2bc53f5ddc6e178bf8e2af19a\transformed\gifdecoder-4.15.1\AndroidManifest.xml:5:5-7:41
+MERGED from [com.github.bumptech.glide:gifdecoder:4.15.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\463e85e2bc53f5ddc6e178bf8e2af19a\transformed\gifdecoder-4.15.1\AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.3] C:\zoo\soft\gradle-7.4\caches\transforms-3\ed86d0e35715f2ab4a7a4487bd853bcc\transformed\exifinterface-1.3.3\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.3] C:\zoo\soft\gradle-7.4\caches\transforms-3\ed86d0e35715f2ab4a7a4487bd853bcc\transformed\exifinterface-1.3.3\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.startup:startup-runtime:1.1.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\8852f0037f632b0d222b1b1cdbe1df17\transformed\startup-runtime-1.1.1\AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.startup:startup-runtime:1.1.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\8852f0037f632b0d222b1b1cdbe1df17\transformed\startup-runtime-1.1.1\AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.tracing:tracing:1.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\adb47faba38b06b86f4f0640110057e9\transformed\tracing-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\adb47faba38b06b86f4f0640110057e9\transformed\tracing-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\f4494948c462e26ca4d899f964316558\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\f4494948c462e26ca4d899f964316558\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\39469ed9046dd923a26e341ee5b5f935\transformed\lifecycle-livedata-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\39469ed9046dd923a26e341ee5b5f935\transformed\lifecycle-livedata-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.5.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\cbf88d7d842bf80930f09cad95e7c968\transformed\lifecycle-livedata-core-2.5.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.5.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\cbf88d7d842bf80930f09cad95e7c968\transformed\lifecycle-livedata-core-2.5.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.1.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\ab3c30db4c003e43a40a3aa04c49f677\transformed\core-runtime-2.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.1.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\ab3c30db4c003e43a40a3aa04c49f677\transformed\core-runtime-2.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\b098e4ef393c4d531f701ecc35b6ea3c\transformed\documentfile-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\b098e4ef393c4d531f701ecc35b6ea3c\transformed\documentfile-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\a043b3a74b89a35c00481a76d9343e9f\transformed\print-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\a043b3a74b89a35c00481a76d9343e9f\transformed\print-1.0.0\AndroidManifest.xml:20:5-44
+INJECTED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml
+INJECTED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml
+		ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml
+		INJECTED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml
+		ADDED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml
+		INJECTED from C:\zoo\work\pho\test\pho_android\app\src\main\AndroidManifest.xml
+provider#androidx.startup.InitializationProvider
+ADDED from [androidx.emoji2:emoji2:1.2.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\b2f0f25a3c1dd067108f4347e4350351\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.4.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\38cbec902e007fbf50c1cada98ff556e\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:26:9-34:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.4.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\38cbec902e007fbf50c1cada98ff556e\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:26:9-34:20
+MERGED from [androidx.startup:startup-runtime:1.1.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\8852f0037f632b0d222b1b1cdbe1df17\transformed\startup-runtime-1.1.1\AndroidManifest.xml:26:9-30:34
+MERGED from [androidx.startup:startup-runtime:1.1.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\8852f0037f632b0d222b1b1cdbe1df17\transformed\startup-runtime-1.1.1\AndroidManifest.xml:26:9-30:34
+	tools:node
+		ADDED from [androidx.emoji2:emoji2:1.2.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\b2f0f25a3c1dd067108f4347e4350351\transformed\emoji2-1.2.0\AndroidManifest.xml:28:13-31
+	android:authorities
+		ADDED from [androidx.emoji2:emoji2:1.2.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\b2f0f25a3c1dd067108f4347e4350351\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
+	android:exported
+		ADDED from [androidx.emoji2:emoji2:1.2.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\b2f0f25a3c1dd067108f4347e4350351\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
+	android:name
+		ADDED from [androidx.emoji2:emoji2:1.2.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\b2f0f25a3c1dd067108f4347e4350351\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
+meta-data#androidx.emoji2.text.EmojiCompatInitializer
+ADDED from [androidx.emoji2:emoji2:1.2.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\b2f0f25a3c1dd067108f4347e4350351\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.emoji2:emoji2:1.2.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\b2f0f25a3c1dd067108f4347e4350351\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.emoji2:emoji2:1.2.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\b2f0f25a3c1dd067108f4347e4350351\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
+permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.9.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\112b22e3c42df748c54747a76c8f7436\transformed\core-1.9.0\AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.9.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\112b22e3c42df748c54747a76c8f7436\transformed\core-1.9.0\AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.9.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\112b22e3c42df748c54747a76c8f7436\transformed\core-1.9.0\AndroidManifest.xml:23:9-81
+permission#com.example.pho.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.9.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\112b22e3c42df748c54747a76c8f7436\transformed\core-1.9.0\AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.9.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\112b22e3c42df748c54747a76c8f7436\transformed\core-1.9.0\AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.9.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\112b22e3c42df748c54747a76c8f7436\transformed\core-1.9.0\AndroidManifest.xml:23:9-81
+uses-permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.9.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\112b22e3c42df748c54747a76c8f7436\transformed\core-1.9.0\AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.9.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\112b22e3c42df748c54747a76c8f7436\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
+uses-permission#com.example.pho.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.9.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\112b22e3c42df748c54747a76c8f7436\transformed\core-1.9.0\AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.9.0] C:\zoo\soft\gradle-7.4\caches\transforms-3\112b22e3c42df748c54747a76c8f7436\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
+meta-data#androidx.lifecycle.ProcessLifecycleInitializer
+ADDED from [androidx.lifecycle:lifecycle-process:2.4.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\38cbec902e007fbf50c1cada98ff556e\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
+	android:value
+		ADDED from [androidx.lifecycle:lifecycle-process:2.4.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\38cbec902e007fbf50c1cada98ff556e\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
+	android:name
+		ADDED from [androidx.lifecycle:lifecycle-process:2.4.1] C:\zoo\soft\gradle-7.4\caches\transforms-3\38cbec902e007fbf50c1cada98ff556e\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78

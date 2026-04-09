@@ -1,0 +1,23 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+  <!-- Blue background -->
+  <path
+      android:fillColor="#3498db"
+      android:pathData="M0,0 L100,0 L100,100 L0,100 Z"/>
+  <!-- Text ZOO -->
+  <!-- Z -->
+  <path
+      android:fillColor="#ffffff"
+      android:pathData="M25,35 L35,35 L45,65 L55,65 L45,35 L55,35 L65,65 L55,65 L45,35 L35,35 L25,65 L35,65 Z"/>
+  <!-- O -->
+  <path
+      android:fillColor="#ffffff"
+      android:pathData="M70,35 C75,35 80,40 80,45 C80,50 75,55 70,55 C65,55 60,50 60,45 C60,40 65,35 70,35 Z M70,38 C73,38 77,41 77,45 C77,49 73,52 70,52 C67,52 63,49 63,45 C63,41 67,38 70,38 Z"/>
+  <!-- O -->
+  <path
+      android:fillColor="#ffffff"
+      android:pathData="M80,35 C85,35 90,40 90,45 C90,50 85,55 80,55 C75,55 70,50 70,45 C70,40 75,35 80,35 Z M80,38 C83,38 87,41 87,45 C87,49 83,52 80,52 C77,52 73,49 73,45 C73,41 77,38 80,38 Z"/>
+</vector>

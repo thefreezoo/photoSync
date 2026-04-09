@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">photoSync</string>
+    <string name="nav_photos">本地图片</string>
+    <string name="nav_sync">云端图片</string>
+    <string name="nav_settings">设置</string>
+    <string name="no_photos">未找到图片</string>
+    <string name="test_connection">测试连接</string>
+    <string name="start_sync">开始同步</string>
+    <string name="connection_successful">连接成功！</string>
+    <string name="connection_failed">连接失败: %s</string>
+    <string name="sync_completed">同步完成！</string>
+    <string name="sync_failed">同步失败: %s</string>
+    <string name="webdav_url">WebDAV地址</string>
+    <string name="username">用户名</string>
+    <string name="password">密码</string>
+    <string name="remote_path">远程路径</string>
+    <string name="please_enter_url">请输入WebDAV地址</string>
+    <string name="please_enter_username">请输入用户名</string>
+    <string name="please_enter_password">请输入密码</string>
+    <string name="please_enter_path">请输入远程路径</string>
+    <string name="no_sync_records">未找到同步记录</string>
+    <string name="synced_at">同步时间: %s</string>
+    <string name="sync_error">同步错误</string>
+    <string name="ok">确定</string>
+    <string name="photo_count">%d 张图片</string>
+</resources>

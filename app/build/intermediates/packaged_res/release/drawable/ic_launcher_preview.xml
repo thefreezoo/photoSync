@@ -1,0 +1,30 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+  <!-- Blue background -->
+  <path
+      android:fillColor="#3498db"
+      android:pathData="M0,0 L100,0 L100,100 L0,100 Z"/>
+  <!-- Cloud -->
+  <path
+      android:fillColor="#ffffff"
+      android:pathData="M50,25 C40,25 30,35 30,45 C20,50 20,65 30,70 C35,75 45,75 50,70 C60,80 75,80 85,70 C95,60 95,45 85,40 C85,30 75,30 70,40 C65,20 55,20 50,25 Z"/>
+  <!-- Camera -->
+  <path
+      android:fillColor="#3498db"
+      android:pathData="M40,45 L60,45 L60,65 L40,65 Z"/>
+  <!-- Camera outline -->
+  <path
+      android:fillColor="#ffffff"
+      android:pathData="M40,45 L60,45 L60,65 L40,65 Z M45,50 L55,50 L55,60 L45,60 Z M58,48 L60,48 L60,50 L58,50 Z"/>
+  <!-- Camera lens -->
+  <path
+      android:fillColor="#3498db"
+      android:pathData="M50,52 C52,52 54,53 54,55 C54,57 52,58 50,58 C48,58 46,57 46,55 C46,53 48,52 50,52 Z"/>
+  <!-- Camera lens highlight -->
+  <path
+      android:fillColor="#ffffff"
+      android:pathData="M48,53 L49,53 L49,54 L48,54 Z"/>
+</vector>
