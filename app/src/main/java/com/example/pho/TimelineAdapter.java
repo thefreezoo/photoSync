@@ -302,26 +302,51 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                             .into(holder.photoImageViewUnsynced);
                 }
             } else {
-                // It's a local photo, load from content URI
-                Uri uri = Uri.withAppendedPath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, String.valueOf(photo.getId()));
-                if (photo.isSynced()) {
-                    Glide.with(context)
-                            .load(uri)
-                            .centerCrop()
-                            .error(android.R.drawable.ic_menu_gallery) // Show placeholder if image not found
-                            .placeholder(android.R.drawable.ic_menu_gallery) // Show placeholder while loading
-                            .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL) // Cache both original and resized images
-                            .skipMemoryCache(false) // Use memory cache
-                            .into(holder.photoImageView);
+                // It's a local media, load from content URI
+                if (photo.isVideo()) {
+                    // It's a video, load video thumbnail
+                    Uri uri = Uri.withAppendedPath(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, String.valueOf(photo.getId()));
+                    if (photo.isSynced()) {
+                        Glide.with(context)
+                                .load(uri)
+                                .centerCrop()
+                                .error(android.R.drawable.ic_media_play)
+                                .placeholder(android.R.drawable.ic_media_play)
+                                .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL)
+                                .skipMemoryCache(false)
+                                .into(holder.photoImageView);
+                    } else {
+                        Glide.with(context)
+                                .load(uri)
+                                .centerCrop()
+                                .error(android.R.drawable.ic_media_play)
+                                .placeholder(android.R.drawable.ic_media_play)
+                                .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL)
+                                .skipMemoryCache(false)
+                                .into(holder.photoImageViewUnsynced);
+                    }
                 } else {
-                    Glide.with(context)
-                            .load(uri)
-                            .centerCrop()
-                            .error(android.R.drawable.ic_menu_gallery) // Show placeholder if image not found
-                            .placeholder(android.R.drawable.ic_menu_gallery) // Show placeholder while loading
-                            .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL) // Cache both original and resized images
-                            .skipMemoryCache(false) // Use memory cache
-                            .into(holder.photoImageViewUnsynced);
+                    // It's a photo, load from content URI
+                    Uri uri = Uri.withAppendedPath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, String.valueOf(photo.getId()));
+                    if (photo.isSynced()) {
+                        Glide.with(context)
+                                .load(uri)
+                                .centerCrop()
+                                .error(android.R.drawable.ic_menu_gallery) // Show placeholder if image not found
+                                .placeholder(android.R.drawable.ic_menu_gallery) // Show placeholder while loading
+                                .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL) // Cache both original and resized images
+                                .skipMemoryCache(false) // Use memory cache
+                                .into(holder.photoImageView);
+                    } else {
+                        Glide.with(context)
+                                .load(uri)
+                                .centerCrop()
+                                .error(android.R.drawable.ic_menu_gallery) // Show placeholder if image not found
+                                .placeholder(android.R.drawable.ic_menu_gallery) // Show placeholder while loading
+                                .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL) // Cache both original and resized images
+                                .skipMemoryCache(false) // Use memory cache
+                                .into(holder.photoImageViewUnsynced);
+                    }
                 }
             }
 
@@ -344,6 +369,13 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 holder.selectedIcon.setVisibility(View.GONE);
                 holder.selectedOverlay.setVisibility(View.GONE);
             }
+
+            // Show play icon if it's a video
+            if (photo.isVideo()) {
+                holder.playIcon.setVisibility(View.VISIBLE);
+            } else {
+                holder.playIcon.setVisibility(View.GONE);
+            }
         }
 
         @Override
@@ -356,6 +388,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             ImageView photoImageViewUnsynced;
             ImageView syncedIcon;
             ImageView selectedIcon;
+            ImageView playIcon;
             View photoContainer;
             View selectedOverlay;
 
@@ -365,6 +398,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 photoImageViewUnsynced = itemView.findViewById(R.id.photo_image_unsynced);
                 syncedIcon = itemView.findViewById(R.id.synced_icon);
                 selectedIcon = itemView.findViewById(R.id.selected_icon);
+                playIcon = itemView.findViewById(R.id.play_icon);
                 photoContainer = itemView.findViewById(R.id.photo_container);
                 selectedOverlay = itemView.findViewById(R.id.selected_overlay);
 

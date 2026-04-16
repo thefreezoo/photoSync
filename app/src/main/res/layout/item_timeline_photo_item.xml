@@ -62,4 +62,16 @@
         android:visibility="gone"
         android:contentDescription="Selected overlay" />
 
+    <!-- Play icon for videos -->
+    <ImageView
+        android:id="@+id/play_icon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_centerInParent="true"
+        android:src="@android:drawable/ic_media_play"
+        android:tint="#FFFFFF"
+        android:alpha="0.8"
+        android:visibility="gone"
+        android:contentDescription="Play video" />
+
 </RelativeLayout>

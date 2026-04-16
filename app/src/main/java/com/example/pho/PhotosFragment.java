@@ -4,9 +4,12 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -30,6 +33,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.content.Context;
 import androidx.fragment.app.FragmentActivity;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class PhotosFragment extends Fragment {
@@ -189,20 +194,33 @@ public class PhotosFragment extends Fragment {
     }
 
     private void openImagePreview(int position) {
-        // Prepare data for preview
-        ArrayList<Long> photoIds = new ArrayList<>();
-        ArrayList<String> photoNames = new ArrayList<>();
-        for (Photo photo : photoList) {
-            photoIds.add(photo.getId());
-            photoNames.add(photo.getName());
-        }
+        Photo photo = photoList.get(position);
+        
+        // Check if it's a video
+        if (photo.isVideo()) {
+            // It's a video, open with system video player
+            Uri videoUri = Uri.withAppendedPath(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, String.valueOf(photo.getId()));
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setDataAndType(videoUri, "video/*");
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            startActivity(intent);
+        } else {
+            // It's an image, open image preview
+            // Prepare data for preview
+            ArrayList<Long> photoIds = new ArrayList<>();
+            ArrayList<String> photoNames = new ArrayList<>();
+            for (Photo p : photoList) {
+                photoIds.add(p.getId());
+                photoNames.add(p.getName());
+            }
 
-        // Open image preview activity
-        Intent intent = new Intent(getActivity(), NewImagePreviewActivity.class);
-        intent.putExtra("photo_ids", toLongArray(photoIds));
-        intent.putExtra("photo_names", photoNames);
-        intent.putExtra("current_position", position);
-        startActivity(intent);
+            // Open image preview activity
+            Intent intent = new Intent(getActivity(), NewImagePreviewActivity.class);
+            intent.putExtra("photo_ids", toLongArray(photoIds));
+            intent.putExtra("photo_names", photoNames);
+            intent.putExtra("current_position", position);
+            startActivity(intent);
+        }
     }
 
     private void toggleSelection(int position) {
@@ -348,11 +366,18 @@ public class PhotosFragment extends Fragment {
                                 String fileName = photo.getName();
                                 System.out.println("File name: " + fileName);
 
-                                // Get photo content URI
-                                android.net.Uri uri = android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI.buildUpon()
-                                        .appendPath(String.valueOf(photo.getId()))
-                                        .build();
-                                System.out.println("Photo URI: " + uri.toString());
+                                // Get media content URI based on file type
+                                android.net.Uri uri;
+                                if (photo.isVideo()) {
+                                    uri = android.provider.MediaStore.Video.Media.EXTERNAL_CONTENT_URI.buildUpon()
+                                            .appendPath(String.valueOf(photo.getId()))
+                                            .build();
+                                } else {
+                                    uri = android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI.buildUpon()
+                                            .appendPath(String.valueOf(photo.getId()))
+                                            .build();
+                                }
+                                System.out.println("Media URI: " + uri.toString());
 
                                 // Create directory structure first
                                 System.out.println("Creating directory structure: " + finalRemotePath + folderPath);
@@ -714,8 +739,17 @@ public class PhotosFragment extends Fragment {
     }
 
     private boolean hasStoragePermission() {
+        // First check if we have MANAGE_EXTERNAL_STORAGE permission (if available)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            if (Environment.isExternalStorageManager()) {
+                return true;
+            }
+        }
+        
+        // Fallback to other permissions if MANAGE_EXTERNAL_STORAGE is not granted
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            return ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_GRANTED;
+            return ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_GRANTED &&
+                   ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_MEDIA_VIDEO) == PackageManager.PERMISSION_GRANTED;
         } else {
             return ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
         }
@@ -723,8 +757,17 @@ public class PhotosFragment extends Fragment {
 
     private void requestStoragePermission() {
         if (getActivity() != null) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_MEDIA_IMAGES}, REQUEST_PERMISSION);
+            // Always request MANAGE_EXTERNAL_STORAGE permission first if available
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                // Request MANAGE_EXTERNAL_STORAGE permission
+                Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                Uri uri = Uri.fromParts("package", getActivity().getPackageName(), null);
+                intent.setData(uri);
+                getActivity().startActivityForResult(intent, REQUEST_PERMISSION);
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                ActivityCompat.requestPermissions(getActivity(), 
+                    new String[]{Manifest.permission.READ_MEDIA_IMAGES, Manifest.permission.READ_MEDIA_VIDEO}, 
+                    REQUEST_PERMISSION);
             } else {
                 ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_PERMISSION);
             }
@@ -733,6 +776,19 @@ public class PhotosFragment extends Fragment {
 
     public void loadPhotos() {
         System.out.println("=== loadPhotos() started ===");
+        
+        // Check if we have storage permission
+        System.out.println("Checking storage permissions...");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            int imagesPermission = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_MEDIA_IMAGES);
+            int videoPermission = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_MEDIA_VIDEO);
+            System.out.println("READ_MEDIA_IMAGES permission: " + (imagesPermission == PackageManager.PERMISSION_GRANTED ? "GRANTED" : "DENIED"));
+            System.out.println("READ_MEDIA_VIDEO permission: " + (videoPermission == PackageManager.PERMISSION_GRANTED ? "GRANTED" : "DENIED"));
+        } else {
+            int storagePermission = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE);
+            System.out.println("READ_EXTERNAL_STORAGE permission: " + (storagePermission == PackageManager.PERMISSION_GRANTED ? "GRANTED" : "DENIED"));
+        }
+        
         // Get selected folders from settings
         android.content.SharedPreferences preferences = getContext().getSharedPreferences("webdav_settings", android.content.Context.MODE_PRIVATE);
         boolean includeSubfolders = preferences.getBoolean("include_subfolders", true);
@@ -769,19 +825,8 @@ public class PhotosFragment extends Fragment {
         System.out.println("Number of folders: " + folders.size());
         System.out.println("Include subfolders: " + includeSubfolders);
         
-        // For Android 10+, we need to use MediaStore to query photos
-        String[] projection = {
-            MediaStore.Images.Media._ID,
-            MediaStore.Images.Media.DISPLAY_NAME,
-            MediaStore.Images.Media.DATE_TAKEN,
-            MediaStore.Images.Media.DATE_ADDED,
-            MediaStore.Images.Media.RELATIVE_PATH,
-            MediaStore.Images.Media.BUCKET_DISPLAY_NAME
-        };
-        String sortOrder = MediaStore.Images.Media.DATE_TAKEN + " DESC";
-        
-        photoList.clear();
-        int count = 0;
+        // Query both images and videos
+        List<Photo> allMedia = new ArrayList<>();
         
         // Process each selected folder
         for (String folder : folders) {
@@ -845,86 +890,149 @@ public class PhotosFragment extends Fragment {
                 continue;
             }
             
-            // Build the selection query based on includeSubfolders
-            String selection;
-            String[] selectionArgs;
-            if (includeSubfolders) {
-                // Include subfolders: relativePath starts with folderPath
-                selection = MediaStore.Images.Media.RELATIVE_PATH + " LIKE ?";
-                selectionArgs = new String[]{folderPath + "/%"};
+            // Query images for this folder
+            allMedia.addAll(queryMediaStoreFromFolder(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, folderPath, includeSubfolders));
+            
+            // Check if we have video permission before querying videos
+            boolean hasVideoPermission = false;
+            
+            // First check if we have MANAGE_EXTERNAL_STORAGE permission (if available)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                if (Environment.isExternalStorageManager()) {
+                    hasVideoPermission = true;
+                } else {
+                    // Fallback to READ_MEDIA_VIDEO permission for Android 13+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        hasVideoPermission = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_MEDIA_VIDEO) == PackageManager.PERMISSION_GRANTED;
+                    }
+                }
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                // For Android 13+ without MANAGE_EXTERNAL_STORAGE, check READ_MEDIA_VIDEO permission
+                hasVideoPermission = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_MEDIA_VIDEO) == PackageManager.PERMISSION_GRANTED;
             } else {
-                // Exclude subfolders: relativePath equals folderPath or folderPath + /
-                selection = MediaStore.Images.Media.RELATIVE_PATH + " = ? OR " + MediaStore.Images.Media.RELATIVE_PATH + " = ?";
-                selectionArgs = new String[]{folderPath, folderPath + "/"};
+                // For older versions, check READ_EXTERNAL_STORAGE permission
+                hasVideoPermission = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
             }
             
-            try (Cursor cursor = getContext().getContentResolver().query(
-                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                    projection,
-                    selection,
-                    selectionArgs,
-                    sortOrder
-            )) {
-                System.out.println("Cursor obtained for folder " + folderPath + ": " + (cursor != null));
-                if (cursor != null) {
-                    System.out.println("Cursor count for folder " + folderPath + ": " + cursor.getCount());
-                    
-                    int idColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID);
-                    int nameColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DISPLAY_NAME);
-                    int dateTakenColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATE_TAKEN);
-                    int dateAddedColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATE_ADDED);
-                    int relativePathColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.RELATIVE_PATH);
-                    int bucketDisplayNameColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_DISPLAY_NAME);
-
-                    int totalProcessed = 0;
-                    System.out.println("Processing photos from folder: " + folderPath);
-                    
-                    while (cursor.moveToNext()) {
-                        totalProcessed++;
-                        long id = cursor.getLong(idColumn);
-                        String name = cursor.getString(nameColumn);
-                        long dateTaken = cursor.getLong(dateTakenColumn);
-                        // Use date taken if available, otherwise use date added
-                        long dateAdded = dateTaken > 0 ? dateTaken / 1000 : cursor.getLong(dateAddedColumn);
-                        String relativePath = cursor.getString(relativePathColumn);
-                        String bucketDisplayName = cursor.getString(bucketDisplayNameColumn);
-
-                        // Log photo information for debugging
-                        if (totalProcessed <= 10) { // Log first 10 photos for debugging
-                            System.out.println("Photo: " + name + ", Relative path: " + relativePath + ", Bucket: " + bucketDisplayName);
-                        }
-
-                        // Check sync status from persistent storage
-                        boolean isSynced = syncStatusManager.isSynced(String.valueOf(id));
-                        // For local photos, path can be null or use content URI
-                        Photo photo = new Photo(id, name, null, dateAdded, isSynced);
-                        photoList.add(photo);
-                        count++;
-                        if (count <= 10) {
-                            System.out.println("Added photo: " + name);
-                        }
-                    }
-
-                    System.out.println("Total photos processed from folder " + folderPath + ": " + totalProcessed);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                System.out.println("Error loading photos from folder " + folderPath + ": " + e.getMessage());
+            if (hasVideoPermission) {
+                // Query videos for this folder
+                allMedia.addAll(queryMediaStoreFromFolder(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, folderPath, includeSubfolders));
+            } else {
+                System.out.println("No video permission, skipping video query");
             }
         }
-
-        System.out.println("Total photos added from selected folders: " + photoList.size());
         
-        System.out.println("Updating timeline adapter...");
-        if (timelineAdapter != null) {
-            timelineAdapter.updatePhotos(photoList);
-            System.out.println("Updating UI...");
-            updateUI();
-            System.out.println("UI updated successfully");
-        } else {
-            System.out.println("timelineAdapter is null, cannot update photos");
+        // Sort all media by date taken/added (newest first)
+        Collections.sort(allMedia, new Comparator<Photo>() {
+            @Override
+            public int compare(Photo p1, Photo p2) {
+                return Long.compare(p2.getDateAdded(), p1.getDateAdded());
+            }
+        });
+        
+        // No limit on media items
+        
+        try {
+            photoList.clear();
+            photoList.addAll(allMedia);
+            
+            System.out.println("Total media processed: " + allMedia.size());
+            System.out.println("Media added from selected folders: " + photoList.size());
+            
+            System.out.println("Updating timeline adapter...");
+            if (timelineAdapter != null) {
+                timelineAdapter.updatePhotos(photoList);
+                System.out.println("Updating UI...");
+                updateUI();
+                System.out.println("UI updated successfully");
+            } else {
+                System.out.println("timelineAdapter is null, cannot update photos");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error loading media from folders: " + e.getMessage());
         }
         System.out.println("=== loadPhotosFromSelectedFolders() completed ===");
+    }
+    
+    // Helper method to query MediaStore for media items from a specific folder
+    private List<Photo> queryMediaStoreFromFolder(Uri contentUri, String folderPath, boolean includeSubfolders) {
+        List<Photo> mediaList = new ArrayList<>();
+        
+        System.out.println("=== queryMediaStoreFromFolder() started ===");
+        System.out.println("Content URI: " + contentUri);
+        System.out.println("Folder path: " + folderPath);
+        System.out.println("Include subfolders: " + includeSubfolders);
+        
+        String[] projection = {
+            MediaStore.MediaColumns._ID,
+            MediaStore.MediaColumns.DISPLAY_NAME,
+            MediaStore.MediaColumns.DATE_TAKEN,
+            MediaStore.MediaColumns.DATE_ADDED,
+            MediaStore.MediaColumns.RELATIVE_PATH
+        };
+        
+        // Build the selection query based on includeSubfolders
+        String selection;
+        String[] selectionArgs;
+        if (includeSubfolders) {
+            // Include subfolders: relativePath starts with folderPath
+            selection = MediaStore.MediaColumns.RELATIVE_PATH + " LIKE ?";
+            selectionArgs = new String[]{folderPath + "/%"};
+        } else {
+            // Exclude subfolders: relativePath equals folderPath or folderPath + /
+            selection = MediaStore.MediaColumns.RELATIVE_PATH + " = ? OR " + MediaStore.MediaColumns.RELATIVE_PATH + " = ?";
+            selectionArgs = new String[]{folderPath, folderPath + "/"};
+        }
+        
+        System.out.println("Selection: " + selection);
+        System.out.println("Selection args: " + java.util.Arrays.toString(selectionArgs));
+        
+        // Query media from the specified folder
+        try (Cursor cursor = getContext().getContentResolver().query(
+                contentUri,
+                projection,
+                selection,
+                selectionArgs,
+                MediaStore.MediaColumns.DATE_TAKEN + " DESC, " + MediaStore.MediaColumns.DATE_ADDED + " DESC"
+        )) {
+            System.out.println("Cursor obtained for contentUri " + contentUri + ": " + (cursor != null));
+            if (cursor != null) {
+                System.out.println("Cursor count for contentUri " + contentUri + ": " + cursor.getCount());
+                
+                int idColumn = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns._ID);
+                int nameColumn = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DISPLAY_NAME);
+                int dateTakenColumn = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATE_TAKEN);
+                int dateAddedColumn = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATE_ADDED);
+                int relativePathColumn = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.RELATIVE_PATH);
+                
+                int count = 0;
+                while (cursor.moveToNext()) {
+                    long id = cursor.getLong(idColumn);
+                    String name = cursor.getString(nameColumn);
+                    long dateTaken = cursor.getLong(dateTakenColumn);
+                    long dateAdded = dateTaken > 0 ? dateTaken / 1000 : cursor.getLong(dateAddedColumn);
+                    String relativePath = cursor.getString(relativePathColumn);
+                    
+                    if (count < 10) { // Log first 10 items
+                        System.out.println("Found media: " + name + ", Path: " + relativePath);
+                    }
+                    
+                    // Check sync status from persistent storage
+                    boolean isSynced = syncStatusManager.isSynced(String.valueOf(id));
+                    Photo photo = new Photo(id, name, null, dateAdded, isSynced);
+                    mediaList.add(photo);
+                    count++;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error querying media: " + e.getMessage());
+        }
+        
+        System.out.println("Media items loaded from " + contentUri + ": " + mediaList.size());
+        System.out.println("=== queryMediaStoreFromFolder() completed ===");
+        return mediaList;
     }
 
     private void loadAllPhotos() {
@@ -942,64 +1050,48 @@ public class PhotosFragment extends Fragment {
         
         isLoading = true;
         
-        String[] projection = {MediaStore.Images.Media._ID, MediaStore.Images.Media.DISPLAY_NAME, MediaStore.Images.Media.DATE_TAKEN, MediaStore.Images.Media.DATE_ADDED, MediaStore.Images.Media.BUCKET_DISPLAY_NAME};
-        String sortOrder = MediaStore.Images.Media.DATE_TAKEN + " DESC";
+        // Query both images and videos
+        List<Photo> allMedia = new ArrayList<>();
         
-        // Calculate offset for pagination
+        // Query images
+        allMedia.addAll(queryMediaStore(MediaStore.Images.Media.EXTERNAL_CONTENT_URI));
+        
+        // Query videos
+        allMedia.addAll(queryMediaStore(MediaStore.Video.Media.EXTERNAL_CONTENT_URI));
+        
+        // Sort all media by date taken/added (newest first)
+        Collections.sort(allMedia, new Comparator<Photo>() {
+            @Override
+            public int compare(Photo p1, Photo p2) {
+                return Long.compare(p2.getDateAdded(), p1.getDateAdded());
+            }
+        });
+        
+        // Calculate offset and limit for pagination
         int offset = (page - 1) * PAGE_SIZE;
+        int end = Math.min(offset + PAGE_SIZE, allMedia.size());
+        
+        try {
+            // Add the paginated media to the photoList
+            if (reset) {
+                photoList.clear();
+            }
+            
+            if (offset < allMedia.size()) {
+                List<Photo> paginatedMedia = allMedia.subList(offset, end);
+                photoList.addAll(paginatedMedia);
+            }
+            
+            // Check if there are more items
+            isLastPage = end >= allMedia.size();
+            currentPage = page;
 
-        try (Cursor cursor = getContext().getContentResolver().query(
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                projection,
-                null,
-                null,
-                sortOrder
-        )) {
-            if (cursor != null) {
-                int idColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID);
-                int nameColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DISPLAY_NAME);
-                int dateTakenColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATE_TAKEN);
-                int dateAddedColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATE_ADDED);
-
-                boolean hasMore = false;
-                int count = 0;
-                
-                // Skip to the offset
-                if (offset > 0) {
-                    cursor.moveToPosition(offset - 1);
-                }
-                
-                // Load up to PAGE_SIZE items
-                int itemsLoaded = 0;
-                while (cursor.moveToNext() && itemsLoaded < PAGE_SIZE) {
-                    long id = cursor.getLong(idColumn);
-                    String name = cursor.getString(nameColumn);
-                    long dateTaken = cursor.getLong(dateTakenColumn);
-                    // Use date taken if available, otherwise use date added
-                    long dateAdded = dateTaken > 0 ? dateTaken / 1000 : cursor.getLong(dateAddedColumn);
-
-                    // For Android 10+, we don't need the path, we'll use content URI
-                    // Check sync status from persistent storage
-                    boolean isSynced = syncStatusManager.isSynced(String.valueOf(id));
-                    // For local photos, path can be null or use content URI
-                    Photo photo = new Photo(id, name, null, dateAdded, isSynced);
-                    photoList.add(photo);
-                    count++;
-                    itemsLoaded++;
-                }
-                
-                // Check if there are more items
-                hasMore = cursor.moveToNext();
-                isLastPage = !hasMore;
-                currentPage = page;
-
-                timelineAdapter.updatePhotos(photoList);
-                updateUI();
-                
-                // Restore scroll position if not resetting
-                if (!reset && scrollPosition > 0) {
-                    recyclerView.scrollToPosition(scrollPosition);
-                }
+            timelineAdapter.updatePhotos(photoList);
+            updateUI();
+            
+            // Restore scroll position if not resetting
+            if (!reset && scrollPosition > 0) {
+                recyclerView.scrollToPosition(scrollPosition);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -1007,40 +1099,116 @@ public class PhotosFragment extends Fragment {
             isLoading = false;
         }
     }
-
-    private void loadPhotosFromFolders(List<String> folders, boolean includeSubfolders) {
-        // For Android 10+, we need to use MediaStore to query photos from specific folders
-        String[] projection = {MediaStore.Images.Media._ID, MediaStore.Images.Media.DISPLAY_NAME, MediaStore.Images.Media.DATE_TAKEN, MediaStore.Images.Media.DATE_ADDED, MediaStore.Images.Media.RELATIVE_PATH, MediaStore.Images.Media.BUCKET_DISPLAY_NAME, MediaStore.Images.Media.BUCKET_ID};
-        String sortOrder = MediaStore.Images.Media.DATE_TAKEN + " DESC";
-
+    
+    // Helper method to query MediaStore for media items
+    private List<Photo> queryMediaStore(Uri contentUri) {
+        List<Photo> mediaList = new ArrayList<>();
+        
+        String[] projection = {
+            MediaStore.MediaColumns._ID,
+            MediaStore.MediaColumns.DISPLAY_NAME,
+            MediaStore.MediaColumns.DATE_TAKEN,
+            MediaStore.MediaColumns.DATE_ADDED
+        };
+        
         try (Cursor cursor = getContext().getContentResolver().query(
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                contentUri,
                 projection,
                 null,
                 null,
-                sortOrder
+                MediaStore.MediaColumns.DATE_TAKEN + " DESC, " + MediaStore.MediaColumns.DATE_ADDED + " DESC"
         )) {
             if (cursor != null) {
-                int idColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID);
-                int nameColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DISPLAY_NAME);
-                int dateTakenColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATE_TAKEN);
-                int dateAddedColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATE_ADDED);
-                int relativePathColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.RELATIVE_PATH);
-                int bucketDisplayNameColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_DISPLAY_NAME);
+                int idColumn = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns._ID);
+                int nameColumn = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DISPLAY_NAME);
+                int dateTakenColumn = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATE_TAKEN);
+                int dateAddedColumn = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATE_ADDED);
+                
+                while (cursor.moveToNext()) {
+                    long id = cursor.getLong(idColumn);
+                    String name = cursor.getString(nameColumn);
+                    long dateTaken = cursor.getLong(dateTakenColumn);
+                    // Use date taken if available, otherwise use date added
+                    long dateAdded = dateTaken > 0 ? dateTaken / 1000 : cursor.getLong(dateAddedColumn);
 
-                photoList.clear();
-                int count = 0;
-                int totalProcessed = 0;
-                System.out.println("Processing photos for selected folders...");
-                
-                // For debugging, log the selected folders
-                System.out.println("Selected folders:");
-                for (String folder : folders) {
-                    System.out.println("- " + folder);
+                    // Check sync status from persistent storage
+                    boolean isSynced = syncStatusManager.isSynced(String.valueOf(id));
+                    // For local media, path can be null or use content URI
+                    Photo photo = new Photo(id, name, null, dateAdded, isSynced);
+                    mediaList.add(photo);
                 }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return mediaList;
+    }
+
+    private void loadPhotosFromFolders(List<String> folders, boolean includeSubfolders) {
+        // For Android 10+, we need to use MediaStore to query photos and videos from specific folders
+        List<Photo> allMedia = new ArrayList<>();
+        
+        // Query images
+        allMedia.addAll(queryMediaStoreFromFolders(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, folders));
+        
+        // Query videos
+        allMedia.addAll(queryMediaStoreFromFolders(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, folders));
+        
+        // Sort all media by date taken/added (newest first)
+        Collections.sort(allMedia, new Comparator<Photo>() {
+            @Override
+            public int compare(Photo p1, Photo p2) {
+                return Long.compare(p2.getDateAdded(), p1.getDateAdded());
+            }
+        });
+        
+        // No limit on media items
+        
+        try {
+            photoList.clear();
+            photoList.addAll(allMedia);
+            
+            System.out.println("Total media processed: " + allMedia.size());
+            System.out.println("Media added from selected folders: " + photoList.size());
+            
+            timelineAdapter.updatePhotos(photoList);
+            updateUI();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error loading media from folders: " + e.getMessage());
+        }
+    }
+    
+    // Helper method to query MediaStore for media items from specific folders
+    private List<Photo> queryMediaStoreFromFolders(Uri contentUri, List<String> folders) {
+        List<Photo> mediaList = new ArrayList<>();
+        
+        String[] projection = {
+            MediaStore.MediaColumns._ID,
+            MediaStore.MediaColumns.DISPLAY_NAME,
+            MediaStore.MediaColumns.DATE_TAKEN,
+            MediaStore.MediaColumns.DATE_ADDED,
+            MediaStore.MediaColumns.RELATIVE_PATH,
+            MediaStore.MediaColumns.BUCKET_DISPLAY_NAME
+        };
+        
+        try (Cursor cursor = getContext().getContentResolver().query(
+                contentUri,
+                projection,
+                null,
+                null,
+                MediaStore.MediaColumns.DATE_TAKEN + " DESC, " + MediaStore.MediaColumns.DATE_ADDED + " DESC"
+        )) {
+            if (cursor != null) {
+                int idColumn = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns._ID);
+                int nameColumn = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DISPLAY_NAME);
+                int dateTakenColumn = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATE_TAKEN);
+                int dateAddedColumn = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATE_ADDED);
+                int relativePathColumn = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.RELATIVE_PATH);
+                int bucketDisplayNameColumn = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.BUCKET_DISPLAY_NAME);
                 
-                while (cursor.moveToNext() && count < 50) { // Limit to 50 photos for performance
-                    totalProcessed++;
+                while (cursor.moveToNext()) {
                     long id = cursor.getLong(idColumn);
                     String name = cursor.getString(nameColumn);
                     long dateTaken = cursor.getLong(dateTakenColumn);
@@ -1049,45 +1217,29 @@ public class PhotosFragment extends Fragment {
                     String relativePath = cursor.getString(relativePathColumn);
                     String bucketDisplayName = cursor.getString(bucketDisplayNameColumn);
 
-                    // Log photo information for debugging
-                    if (totalProcessed <= 10) { // Log first 10 photos for debugging
-                        System.out.println("Photo: " + name + ", Relative path: " + relativePath + ", Bucket: " + bucketDisplayName);
-                    }
-
-                    // Check if the photo is in any of the selected folders
+                    // Check if the media is in any of the selected folders
                     boolean inSelectedFolder = false;
                     for (String folder : folders) {
-                        // For now, let's be more permissive and include all photos
-                        // This is a temporary fix to ensure photos are displayed
+                        // For now, let's be more permissive and include all media
+                        // This is a temporary fix to ensure media are displayed
                         // We'll implement proper folder filtering later
                         inSelectedFolder = true;
-                        System.out.println("Temporarily including all photos for testing");
                         break;
                     }
 
                     if (inSelectedFolder) {
-                        // For Android 10+, we don't need the path, we'll use content URI
                         // Check sync status from persistent storage
                         boolean isSynced = syncStatusManager.isSynced(String.valueOf(id));
                         Photo photo = new Photo(id, name, String.valueOf(id), dateAdded, isSynced);
-                        photoList.add(photo);
-                        count++;
-                        if (totalProcessed <= 10) {
-                            System.out.println("Added photo: " + name);
-                        }
+                        mediaList.add(photo);
                     }
                 }
-
-                System.out.println("Total photos processed: " + totalProcessed);
-                System.out.println("Photos added from selected folders: " + photoList.size());
-                
-                timelineAdapter.updatePhotos(photoList);
-                updateUI();
             }
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Error loading photos from folders: " + e.getMessage());
         }
+        
+        return mediaList;
     }
 
     private void updateUI() {
@@ -1103,8 +1255,51 @@ public class PhotosFragment extends Fragment {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == REQUEST_PERMISSION) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            boolean allPermissionsGranted = true;
+            boolean videoPermissionGranted = false;
+            
+            for (int i = 0; i < grantResults.length; i++) {
+                if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                    allPermissionsGranted = false;
+                    if (permissions[i].equals(Manifest.permission.READ_MEDIA_VIDEO)) {
+                        videoPermissionGranted = false;
+                    }
+                } else {
+                    if (permissions[i].equals(Manifest.permission.READ_MEDIA_VIDEO)) {
+                        videoPermissionGranted = true;
+                    }
+                }
+            }
+            
+            if (allPermissionsGranted) {
                 loadPhotos();
+            } else if (videoPermissionGranted) {
+                // Only video permission is granted, still load photos but show a warning
+                loadPhotos();
+            } else {
+                // No permissions granted, show a message
+                if (getActivity() != null) {
+                    Toast.makeText(getActivity(), "需要授予存储权限才能查看媒体文件", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
+
+    // Handle the result of MANAGE_EXTERNAL_STORAGE permission request
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_PERMISSION) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                if (Environment.isExternalStorageManager()) {
+                    // Permission granted
+                    loadPhotos();
+                } else {
+                    // Permission denied
+                    if (getActivity() != null) {
+                        Toast.makeText(getActivity(), "需要授予管理文件权限才能查看媒体文件", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         }
     }

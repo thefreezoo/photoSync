@@ -1,6 +1,8 @@
 package com.example.pho;
 
 import android.content.Intent;
+import android.content.ContentProvider;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +20,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,6 +30,12 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.Credentials;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class CloudFragment extends Fragment {
 
@@ -144,32 +156,128 @@ public class CloudFragment extends Fragment {
     private void openImagePreview(int position) {
         // Create a copy of photoList to avoid being affected by subsequent async loading
         List<Photo> currentPhotoList = new ArrayList<>(photoList);
+        Photo photo = currentPhotoList.get(position);
         
-        // Prepare data for preview
-        ArrayList<Long> photoIds = new ArrayList<>();
-        ArrayList<String> photoNames = new ArrayList<>();
-        for (Photo photo : currentPhotoList) {
-            photoIds.add(photo.getId());
-            photoNames.add(photo.getName());
-        }
+        // Check if it's a video
+        if (photo.isVideo()) {
+            // It's a video, download to local cache first then open with system video player
+            downloadAndPlayVideo(photo);
+        } else {
+            // It's an image, open image preview
+            // Prepare data for preview
+            ArrayList<Long> photoIds = new ArrayList<>();
+            ArrayList<String> photoNames = new ArrayList<>();
+            for (Photo p : currentPhotoList) {
+                photoIds.add(p.getId());
+                photoNames.add(p.getName());
+            }
 
-        // Open image preview activity
-        Intent intent = new Intent(getActivity(), NewImagePreviewActivity.class);
-        intent.putExtra("photo_ids", toLongArray(photoIds));
-        intent.putExtra("photo_names", photoNames);
-        intent.putExtra("current_position", position);
-        // Add cloud photos flag
-        intent.putExtra("is_cloud_photos", true);
-        // Add cloud photos paths
-        ArrayList<String> photoPaths = new ArrayList<>();
-        for (Photo photo : currentPhotoList) {
-            photoPaths.add(photo.getPath());
+            // Open image preview activity
+            Intent intent = new Intent(getActivity(), NewImagePreviewActivity.class);
+            intent.putExtra("photo_ids", toLongArray(photoIds));
+            intent.putExtra("photo_names", photoNames);
+            intent.putExtra("current_position", position);
+            // Add cloud photos flag
+            intent.putExtra("is_cloud_photos", true);
+            // Add cloud photos paths
+            ArrayList<String> photoPaths = new ArrayList<>();
+            for (Photo p : currentPhotoList) {
+                photoPaths.add(p.getPath());
+            }
+            intent.putExtra("photo_paths", photoPaths);
+            
+            // Start activity with animation
+            startActivity(intent);
+            getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
-        intent.putExtra("photo_paths", photoPaths);
+    }
+    
+    private void downloadAndPlayVideo(Photo photo) {
+        // Show loading indicator using AlertDialog instead of ProgressDialog
+        final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getActivity());
+        builder.setTitle("下载视频");
+        builder.setMessage("正在下载视频，请稍候...");
+        builder.setCancelable(false);
+        final android.app.AlertDialog alertDialog = builder.create();
+        alertDialog.show();
         
-        // Start activity with animation
-        startActivity(intent);
-        getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        new Thread(() -> {
+            try {
+                // Get WebDAV settings
+                android.content.SharedPreferences preferences = getContext().getSharedPreferences("webdav_settings", android.content.Context.MODE_PRIVATE);
+                String webdavUrl = preferences.getString("webdav_url", "");
+                String webdavUsername = preferences.getString("webdav_username", "");
+                String webdavPassword = preferences.getString("webdav_password", "");
+                
+                // Also check the old shared preferences name for compatibility
+                if (webdavUrl.isEmpty() || webdavUsername.isEmpty() || webdavPassword.isEmpty()) {
+                    android.content.SharedPreferences oldPreferences = getContext().getSharedPreferences("webdav", android.content.Context.MODE_PRIVATE);
+                    if (webdavUrl.isEmpty()) {
+                        webdavUrl = oldPreferences.getString("url", "");
+                    }
+                    if (webdavUsername.isEmpty()) {
+                        webdavUsername = oldPreferences.getString("username", "");
+                    }
+                    if (webdavPassword.isEmpty()) {
+                        webdavPassword = oldPreferences.getString("password", "");
+                    }
+                }
+                
+                // Create OkHttpClient with authentication
+                OkHttpClient client = new OkHttpClient.Builder()
+                        .connectTimeout(30, java.util.concurrent.TimeUnit.SECONDS)
+                        .readTimeout(60, java.util.concurrent.TimeUnit.SECONDS)
+                        .build();
+                
+                // Create request with authentication
+                String credential = okhttp3.Credentials.basic(webdavUsername, webdavPassword);
+                Request request = new Request.Builder()
+                        .url(photo.getPath())
+                        .header("Authorization", credential)
+                        .build();
+                
+                // Execute request
+                Response response = client.newCall(request).execute();
+                if (!response.isSuccessful()) {
+                    throw new Exception("Failed to download video: " + response.code());
+                }
+                
+                // Create cache file
+                String fileName = photo.getName();
+                java.io.File cacheDir = getContext().getCacheDir();
+                java.io.File videoFile = new java.io.File(cacheDir, fileName);
+                
+                // Write response body to cache file
+                try (java.io.InputStream inputStream = response.body().byteStream();
+                     java.io.FileOutputStream outputStream = new java.io.FileOutputStream(videoFile)) {
+                    byte[] buffer = new byte[4096];
+                    int bytesRead;
+                    while ((bytesRead = inputStream.read(buffer)) != -1) {
+                        outputStream.write(buffer, 0, bytesRead);
+                    }
+                }
+                
+                // Close dialog and open video
+                getActivity().runOnUiThread(() -> {
+                    alertDialog.dismiss();
+                    
+                    // Open video with system player
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    Uri videoUri = androidx.core.content.FileProvider.getUriForFile(getContext(), getContext().getPackageName() + ".fileprovider", videoFile);
+                    intent.setDataAndType(videoUri, "video/*");
+                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    startActivity(intent);
+                    getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                });
+                
+            } catch (Exception e) {
+                e.printStackTrace();
+                getActivity().runOnUiThread(() -> {
+                    alertDialog.dismiss();
+                    Toast.makeText(getContext(), "下载视频失败: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+            }
+        }).start();
     }
     
     private long[] toLongArray(ArrayList<Long> list) {
@@ -712,9 +820,11 @@ public class CloudFragment extends Fragment {
                     if (parser.getName().equals("D:response")) {
                         // 结束处理一个响应项
                         if (isFile && currentName != null && !currentName.isEmpty()) {
-                            // 检查是否是图片文件
+                            // 检查是否是图片或视频文件
                             String lowerName = currentName.toLowerCase();
-                            if (lowerName.endsWith(".jpg") || lowerName.endsWith(".jpeg") || lowerName.endsWith(".png") || lowerName.endsWith(".gif")) {
+                            if (lowerName.endsWith(".jpg") || lowerName.endsWith(".jpeg") || lowerName.endsWith(".png") || lowerName.endsWith(".gif") || 
+                                lowerName.endsWith(".mp4") || lowerName.endsWith(".mov") || lowerName.endsWith(".avi") || lowerName.endsWith(".wmv") || 
+                                lowerName.endsWith(".mkv") || lowerName.endsWith(".flv") || lowerName.endsWith(".3gp") || lowerName.endsWith(".webm")) {
                                 // 创建图片URL
                                 // 直接使用WebDAV服务器返回的路径，避免路径重复
                                 String photoUrl;
@@ -856,9 +966,11 @@ public class CloudFragment extends Fragment {
                     if (parser.getName().equals("D:response")) {
                         // 结束处理一个响应项
                         if (isFile && currentName != null && !currentName.isEmpty()) {
-                            // 检查是否是图片文件
+                            // 检查是否是图片或视频文件
                             String lowerName = currentName.toLowerCase();
-                            if (lowerName.endsWith(".jpg") || lowerName.endsWith(".jpeg") || lowerName.endsWith(".png") || lowerName.endsWith(".gif")) {
+                            if (lowerName.endsWith(".jpg") || lowerName.endsWith(".jpeg") || lowerName.endsWith(".png") || lowerName.endsWith(".gif") || 
+                                lowerName.endsWith(".mp4") || lowerName.endsWith(".mov") || lowerName.endsWith(".avi") || lowerName.endsWith(".wmv") || 
+                                lowerName.endsWith(".mkv") || lowerName.endsWith(".flv") || lowerName.endsWith(".3gp") || lowerName.endsWith(".webm")) {
                                 // 创建图片URL
                                 // 直接使用WebDAV服务器返回的路径，避免路径重复
                                 String photoUrl;

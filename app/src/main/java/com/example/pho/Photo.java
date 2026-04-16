@@ -107,4 +107,14 @@ public class Photo {
     public int hashCode() {
         return (int) (id ^ (id >>> 32));
     }
+    
+    // Check if the file is a video
+    public boolean isVideo() {
+        if (name == null) return false;
+        String lowerName = name.toLowerCase();
+        return lowerName.endsWith(".mp4") || lowerName.endsWith(".mov") || 
+               lowerName.endsWith(".avi") || lowerName.endsWith(".wmv") || 
+               lowerName.endsWith(".mkv") || lowerName.endsWith(".flv") || 
+               lowerName.endsWith(".3gp") || lowerName.endsWith(".webm");
+    }
 }
