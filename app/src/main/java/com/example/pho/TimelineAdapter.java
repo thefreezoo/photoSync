@@ -271,15 +271,18 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 String username = preferences.getString("webdav_username", "");
                 String password = preferences.getString("webdav_password", "");
                 
+                // Create AuthenticatedGlideUrl with authentication - this uses only the URL path for caching
+                AuthenticatedGlideUrl glideUrl = new AuthenticatedGlideUrl(
+                        photo.getPath(),
+                        new com.bumptech.glide.load.model.LazyHeaders.Builder()
+                                .addHeader("Authorization", "Basic " + android.util.Base64.encodeToString((username + ":" + password).getBytes(), android.util.Base64.NO_WRAP))
+                                .build()
+                );
+                
                 // Create Glide request with authentication and optimized caching
                 if (photo.isSynced()) {
                     Glide.with(context)
-                            .load(new com.bumptech.glide.load.model.GlideUrl(
-                                    photo.getPath(),
-                                    new com.bumptech.glide.load.model.LazyHeaders.Builder()
-                                            .addHeader("Authorization", "Basic " + android.util.Base64.encodeToString((username + ":" + password).getBytes(), android.util.Base64.NO_WRAP))
-                                            .build()
-                            ))
+                            .load(glideUrl)
                             .centerCrop()
                             .error(android.R.drawable.ic_menu_gallery) // Show placeholder if image not found
                             .placeholder(android.R.drawable.ic_menu_gallery) // Show placeholder while loading
@@ -288,12 +291,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                             .into(holder.photoImageView);
                 } else {
                     Glide.with(context)
-                            .load(new com.bumptech.glide.load.model.GlideUrl(
-                                    photo.getPath(),
-                                    new com.bumptech.glide.load.model.LazyHeaders.Builder()
-                                            .addHeader("Authorization", "Basic " + android.util.Base64.encodeToString((username + ":" + password).getBytes(), android.util.Base64.NO_WRAP))
-                                            .build()
-                            ))
+                            .load(glideUrl)
                             .centerCrop()
                             .error(android.R.drawable.ic_menu_gallery) // Show placeholder if image not found
                             .placeholder(android.R.drawable.ic_menu_gallery) // Show placeholder while loading
